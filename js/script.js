@@ -15,19 +15,22 @@ var main = function() {
     function makeResultBox(id, title, extract) {
         // function for turning pageid into div's link
         var div = document.createElement("div");
+        var pageLink = document.createElement("a");
         var heading = document.createElement("h2");
         var body = document.createElement("p");
-        console.log(extract);
 
+        pageLink.href = "https://en.wikipedia.org/?curid=" + id;
         div.className = "result-box";
+        heading.className = "item-heading";
+        body.className = "item-body";
 
         heading.innerText = title;
         body.innerText = extract;
-
+        pageLink.appendChild(div);
         div.appendChild(heading);
         div.appendChild(body);
 
-        return div;
+        return pageLink;
 
     }
 
@@ -38,10 +41,10 @@ var main = function() {
         async: false,
         dataType: "jsonp",
         success: function (data, textStatus, jqXHR) {
-            
+
             var results = data.query.pages;
             console.log(results);
-
+            $("#results").hide();
             for (var result in results) {
                 // results.pageid
                 var pageID = results[result]["pageid"]; // undefined
@@ -50,17 +53,18 @@ var main = function() {
                 // results.extract
                 var extract = results[result]["extract"];
 
-                var div = makeResultBox(pageID, title, extract);
-                $("#results").append(div);
+                var link = makeResultBox(pageID, title, extract);
+                $("#results").append(link);
+                console.log(pageID);
             }
-
+            $("#results").show("slow");
 
         },
         error: function (errorMessage) {
         	console.log("Unable to retrieve matched titles from wiki :(")
         }
     });
-    
+
 
 
 };

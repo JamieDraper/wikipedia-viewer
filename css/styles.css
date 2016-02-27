@@ -1,0 +1,20 @@
+a {
+	color: #555;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #333;
+}
+
+.result-box {
+	border: 3px dotted #D5E9F0;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-bottom: 20px;
+}
+
+.result-box:hover {
+	border: 3px dotted #BACBD1;
+}
