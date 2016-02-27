@@ -8,49 +8,59 @@ var main = function() {
 	"use strict";
 
 	function getSearchURL(subject) {
-		var BASE_URL = ["https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=", "&srlimit=max&callback=?"];
-		return BASE_URL[0] + subject + BASE_URL[1];
+		var BASE_URL = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrlimit=20&prop=extracts&exintro&explaintext&exsentences=2&exlimit=max&gsrsearch=";
+		return BASE_URL + subject;
 	}
 
-	function stripMarkUp(html) {
-		var div = $('<div id="strip-wrapper">');
-		div.innerHTML = html;
-		var text = div.textContent || div.innerText || "";
-		$("#strip-wrapper").remove();
-		console.log(text);
-		return text;
-	}
+    function makeResultBox(id, title, extract) {
+        // function for turning pageid into div's link
+        var div = document.createElement("div");
+        var heading = document.createElement("h2");
+        var body = document.createElement("p");
+        console.log(extract);
 
-	function removeTags(html){
-	    var txt = html;
-	    var rex = /(<([^>]+)>)/ig;
-	    return txt.replace(rex , "");
+        div.className = "result-box";
 
-	}
+        heading.innerText = title;
+        body.innerText = extract;
 
+        div.appendChild(heading);
+        div.appendChild(body);
+
+        return div;
+
+    }
 
 	$.ajax({
         type: "GET",
-        //url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi_Hendrix&callback=?",
-        url: getSearchURL("dance music"),
+        url: getSearchURL("music"),
         contentType: "application/json; charset=utf-8",
         async: false,
-        dataType: "json",
+        dataType: "jsonp",
         success: function (data, textStatus, jqXHR) {
-            console.log(data);
-            var results = data.query.search;
-            results.forEach(function(result) { // for each result returned
-            	// make result box
-            	// assign title -- result.title
-            	// strip markup from -- result.snippet then assign
-            	// snippet not long enough, need rvprop=content ??? ********
-            });
+            
+            var results = data.query.pages;
+            console.log(results);
+
+            for (var result in results) {
+                // results.pageid
+                var pageID = results[result]["pageid"]; // undefined
+                // results.title
+                var title = results[result]["title"];
+                // results.extract
+                var extract = results[result]["extract"];
+
+                var div = makeResultBox(pageID, title, extract);
+                $("#results").append(div);
+            }
+
+
         },
         error: function (errorMessage) {
-        	console.log("Unable to retrieve data from wiki :(")
+        	console.log("Unable to retrieve matched titles from wiki :(")
         }
     });
-
+    
 
 
 };
