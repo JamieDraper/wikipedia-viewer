@@ -1,20 +1,104 @@
+
+
+/* Search bar */
+
+#dice {
+    height: 55px;
+    position: absolute;
+    top: 16px;
+    right: 0px;
+}
+
+#search-bar {
+    position: relative;
+    height: 60px;
+    margin-bottom: 50px;
+}
+#search {
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 50px;
+}
+#label {
+    width: 60px;
+    height: 60px;
+}
+#label label {
+
+    width: 60px;
+    height: 60px;
+    background: url("http://callmenick.com/_development/expanding-search-bar/img/search.png") 0 0;
+    font-size: 0;
+    color: rgba(0, 0, 0, 0);
+    text-indent: -9999px;
+    cursor: pointer;
+}
+#label label:hover {
+    background: url("http://callmenick.com/_development/expanding-search-bar/img/search.png") -60px 0
+}
+#label.active label {
+    background: url("http://callmenick.com/_development/expanding-search-bar/img/search.png") -60px 0
+}
+#input {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    width: 450px;
+    height: 60px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+#input input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -450px;
+    width: 250px;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    border: none;
+    background-color: #23688b;
+    color: #fff;
+    font-size: 18px;
+    backface-visibility: none;
+    border-radius: 0;
+    transition: left 0;
+}
+#input input:focus {
+    outline: none
+}
+#input.focus {
+    z-index: 20
+}
+#input.focus input {
+    left: 0;
+    transition: left 0.3s;
+}
+
+
+/* Results styling */
 a {
-	color: #555;
+    color: #555;
 }
 
 a:hover {
-	text-decoration: none;
-	color: #333;
+    text-decoration: none;
+    color: #333;
 }
 
 .result-box {
-	border: 3px dotted #D5E9F0;
-	border-radius: 10px;
-	padding-left: 30px;
-	padding-right: 30px;
-	margin-bottom: 20px;
+    border: 3px dotted #D5E9F0;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+  background: rgb(34,34,34); /* for IE */
+  background: rgba(25,25,29,0.10);
 }
 
 .result-box:hover {
-	border: 3px dotted #BACBD1;
+    border: 3px solid #BACBD1;
 }

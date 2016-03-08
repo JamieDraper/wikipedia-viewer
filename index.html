@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Wikipedia Viewer</title>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
@@ -18,17 +19,35 @@
 	</head>
 	<body>
 		<div class= "container">
-		<header>
 
-			<h1>Search</h1>
+			<div id="search-bar" class="clearfix">
+    			<div id="search">
 
-		</header>
-		<main>
-			<div id= "results">
+        			<div id="label">
+
+        				<label for="search-terms" id="search-label">search</label>
+        			</div>
+
+        			<div id="input">
+
+        				<input type="text" name="search-terms" id="search-terms" placeholder="Enter search terms...">
+        			</div>
+            
+    			</div>
+    
+    			<div class="dice-wrap">
+	    			<a href="http://en.wikipedia.org/wiki/Special:Random" id="random-article">
+						<img src= "http://findicons.com/files/icons/2118/nuvola/128/package_games_board.png" id = "dice" alt="Random Article">
+					</a>
+				</div>
+
+				<div id= "results">
+				</div>
 			</div>
 
-		</main>
+
 			<script src="js/jquery-1.12.0.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 			<script src="js/bootstrap.js"></script>
 			<script src="js/script.js"></script>
 		</div>
